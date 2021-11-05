@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of users</title>
+    <link href="/assets/bootstrap-4.6.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+          id="bootstrap-stylesheet">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
+    <script src="/assets/js/jquery-3.6.0.js"></script>
+    <script src="/assets/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+<div class="" style="padding: 25px;">
+    <header>
+        <form>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label for="cityName">City Name</label>
+                    <input type="text" class="form-control" id="cityName">
+                </div>
+                <div class="col-4">
+                    <label for="countryName">Country Name</label>
+                    <input type="email" class="form-control" id="countryName">
+                </div>
+                <div class="col-4">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label for="balance">Balance</label>
+                    <input type="number" class="form-control" id="balance">
+                </div>
+            </div>
+            <button type="button" id="btnCreate" class="btn btn-primary">Create user</button>
+        </form>
+    </header>
+
+    <div class="modal-content" style="border: 0; margin-top: 25px;">
+        <table class="table table-hover">
+            <thead style="background-color: #2a9d05; color: #fff;">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">City Name</th>
+                <th scope="col">Country</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody id="tbListCities">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal update user information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label for="idUp">ID</label>
+                            <input type="text" class="form-control" id="idUp" readonly>
+                        </div>
+                        <div class="col-4">
+                            <label for="fullNameUp">Full Name</label>
+                            <input type="text" class="form-control" id="fullNameUp">
+                        </div>
+                        <div class="col-3">
+                            <label for="emailUp">Email</label>
+                            <input type="email" class="form-control" id="emailUp">
+                        </div>
+                        <div class="col-3">
+                            <label for="phoneUp">Phone</label>
+                            <input type="text" class="form-control" id="phoneUp">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label for="provinceUp">Province</label>
+                            <select id="provinceUp" class="select form-control">
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="districtUp">District</label>
+                            <select id="districtUp" class="select form-control">
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="wardUp">Ward</label>
+                            <select id="wardUp" class="select form-control">
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="balanceUp">Balance</label>
+                            <input type="number" class="form-control" id="balanceUp">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnUpdate" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">City information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-2" style="display: none">
+                            <label for="idInfo">ID</label>
+                            <input type="text" class="form-control" id="idInfo" readonly>
+                        </div>
+                        <div>
+                            <h3>
+                                <div class="col-4">
+                                    <label for="cityNameInfo">City Name</label>
+                                    <input type="text" class="form-control" id="cityNameInfo">
+                                </div>
+                            </h3>
+
+                            <button id = "list">View list city</button>
+                        </div>
+                        <div class="col-3">
+                            <label for="countryNameInfo">Country</label>
+                            <input type="text" class="form-control" id="countryNameInfo">
+                        </div>
+                        <div class="col-3">
+                            <label for="areaInfo">Area</label>
+                            <input type="number" class="form-control" id="areaInfo">
+                        </div>
+                        <div class="col-3">
+                            <label for="populationInfo">Population</label>
+                            <input type="number" class="form-control" id="populationInfo">
+                        </div>
+                        <div class="col-3">
+                            <label for="gdpInfo">GDP</label>
+                            <input type="number" class="form-control" id="gdpInfo">
+                        </div>
+                        <div class="col-12">
+                            <label for="descriptionInfo">Description</label>
+                            <input type="text" class="form-control" id="descriptionInfo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/page/js/app.js"></script>
+
+<script>
+
+
+    let city = new City();
+
+    function getListCity() {
+
+        $.ajax({
+            url: "http://localhost:8080/api/cities",
+            type: "GET"
+        }).done(function (resp) {
+
+            let str = '';
+
+            $.each(resp, function (index, item) {
+                city = item;
+                str = `
+                        <tr id="tr_${city.id}">
+                            <th scope="row">${city.id}</th>
+                            <td>
+                                <a data-toggle="modal" data-target="#infoModal" id = "btnInfo"
+                                data-id="${city.id}">
+                                    ${city.cityName}
+                                </a>
+                            </td>
+                            <td>${city.countryName}</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#updateModal" id = "btnUpdate"
+                                data-id="${city.id}">
+                                    Edit |
+                                </a>
+                            </td>
+
+                            <td>
+                                <a data-toggle="modal" data-target="#deleteModal"
+                                data-id="${city.id}">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+
+                $("#tbListCities").prepend(str);
+                handleEdit();
+            })
+
+        }).fail(function () {
+            alert("List ERROR")
+        });
+    }
+
+    $(document).ready(function () {
+        getListCity();
+    });
+
+    $("#btnCreate").on("click", function () {
+        createCity();
+    })
+
+    $("#btnUpdate").on("click", function () {
+        updateCity();
+    })
+
+    $("#btnInfo").on("click", function () {
+        infoCity();
+    })
+
+    function infoCity() {
+        city.id = $("#idInfo").val();
+        city.cityName = $("#cityNameInfo").text();
+        city.countryName = $("#countryNameInfo").text();
+        city.area = $("#areaInfo").val();
+        city.population = $("#populationInfo").val();
+        city.gdp = $("#gdpInfo").val();
+        city.description = $("#descriptionInfo").text();
+    }
+    //CS
+    function handleEdit() {
+        $("table tbody tr").on("click", ".edit", function () {
+            let id = $(this).data("id");
+
+            console.log("id = " + id)
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "http://localhost:8080/api/cities/" + id,
+                type: "GET"
+            }).done(function (resp) {
+
+                $("#idUp").val(resp.id);
+                $("#fullNameUp").val(resp.fullName);
+                $("#emailUp").val(resp.email);
+                $("#phoneUp").val(resp.phone);
+                $("#balanceUp").val(resp.balance);
+                $("#provinceUp").val(resp.provinceId);
+
+                getAllDistricts(resp.provinceId).then(function () {
+                    $("#districtUp").val(resp.districtId);
+
+                    getAllWards(resp.districtId).then(function () {
+                        $("#wardUp").val(resp.wardId);
+                    });
+                });
+
+            }).fail(function () {
+                alert("ERROR")
+            });
+        })
+    }
+
+    function createUser() {
+
+        user.fullName = $("#fullName").val();
+        user.email = $("#email").val();
+        user.phone = $("#phone").val();
+        user.balance = $("#balance").val();
+        user.provinceId = $("#province").val();
+        user.provinceName = $("#province :selected").text();
+        user.districtId = $("#district").val();
+        user.districtName = $("#district :selected").text();
+        user.wardId = $("#ward").val();
+        user.wardName = $("#ward :selected").text();
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/api/users/create",
+            type: "POST",
+            data: JSON.stringify(user)
+
+        }).done(function (resp) {
+
+            console.log(resp)
+
+            let str = '';
+
+            str = `
+                    <tr id="tr_${resp.id}">
+                        <th scope="row">${resp.id}</th>
+                        <td>${resp.fullName}</td>
+                        <td>${resp.email}</td>
+                        <td>${resp.balance}</td>
+                        <td>${resp.provinceName}</td>
+                        <td>${resp.districtName}</td>
+                        <td>${resp.wardName}</td>
+                        <td>${resp.phone}</td>
+                        <td>
+                            <button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary edit"
+                            data-id="${resp.id}"
+                            >
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+            $("#tbListUser").prepend(str);
+
+            handleEdit();
+
+        }).fail(function () {
+            alert("ERROR")
+        });
+    }
+
+    function updateCity() {
+
+        user.id = $("#idUp").val();
+        user.fullName = $("#fullNameUp").val();
+        user.email = $("#emailUp").val();
+        user.phone = $("#phoneUp").val();
+        user.balance = $("#balanceUp").val();
+        user.provinceId = $("#provinceUp").val();
+        user.provinceName = $("#provinceUp :selected").text();
+        user.districtId = $("#districtUp").val();
+        user.districtName = $("#districtUp :selected").text();
+        user.wardId = $("#wardUp").val();
+        user.wardName = $("#wardUp :selected").text();
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/api/cities/update",
+            type: "POST",
+            data: JSON.stringify(user)
+        }).done(function (resp) {
+
+            let str = '';
+
+            str = `
+                    <tr id="tr_${resp.id}">
+                        <th scope="row">${resp.id}</th>
+                        <td>${resp.fullName}</td>
+                        <td>${resp.email}</td>
+                        <td>${resp.balance}</td>
+                        <td>${resp.provinceName}</td>
+                        <td>${resp.districtName}</td>
+                        <td>${resp.wardName}</td>
+                        <td>${resp.phone}</td>
+                        <td>
+                                <button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary edit"
+                                data-id="${resp.id}"
+                                >
+                                    Edit
+                                </button>
+                         </td>
+                         <td>
+                                <button data-toggle="modal" class="btn btn-outline-danger" data-id="${resp.id}>
+                                    Delete
+                                </button>
+                            </td>
+                    </tr>
+                `;
+
+            $("#tr_" + resp.id).replaceWith(str);
+
+            $("#updateModal").modal('hide');
+
+            handleEdit();
+
+        }).fail(function () {
+            alert("ERROR")
+        });
+    }
+
+    function deleteCity() {
+        let id = $("#idUp").val();
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/api/cities/" + id,
+            type: "POST",
+            data: JSON.stringify(user)
+        }).done(function (resp) {
+            getListCity();
+            alert("SUCCESS");
+        }).fail(function () {
+            alert("ERROR")
+        });
+    }
+
+</script>
+
+</body>
+</html>
